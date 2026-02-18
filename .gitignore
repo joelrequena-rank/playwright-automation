@@ -1,0 +1,7 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+allure-results/
+.env
+.idea/
