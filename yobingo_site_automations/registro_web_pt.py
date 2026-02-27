@@ -1,11 +1,14 @@
 from playwright.sync_api import Playwright, sync_playwright
 from utils_registro.password_generator import generar_password
 from utils_registro.user_generator import generar_user, generar_mail, data
-from config.config import env_selector, pre_login
+from config.config import pre_login, base_url
 from utils_registro.page_load import LoadPage
 from utils_registro.external_data import ExternalDataService
 from utils_registro.form_generator import RegisterPage
 
+"""
+ENV=staging python registro_web_pt.py
+"""
 
 def run(playwright: Playwright) -> None:
 
@@ -15,7 +18,7 @@ def run(playwright: Playwright) -> None:
 
     print("         █▀█ █▀▀ █▀▀ █ █▀ ▀█▀ █▀█ █▀█   █▀█ ▀█▀")
     print("         █▀▄ ██▄ █▄█ █ ▄█ ░█░ █▀▄ █▄█   █▀▀ ░█░")
-    print(f"Environment seleccionado: {env_selector['QA']}")
+    print(f"Environment seleccionado: {base_url}")
     print("         #-------------------------------------#")
 
     # ==============================
@@ -58,7 +61,7 @@ def run(playwright: Playwright) -> None:
     # NAVEGACIÓN A REGISTRO
     # ==============================
 
-    page.goto(env_selector["QA"])
+    page.goto(base_url)
     load_page.page_load()
 
     # ==============================
@@ -73,6 +76,7 @@ def run(playwright: Playwright) -> None:
         password,
         data
     )
+    page.wait_for_load_state("load")
 
     print("Usuario registrado correctamente")
     print("#-----------------------------------------------#")
@@ -80,6 +84,8 @@ def run(playwright: Playwright) -> None:
     # ==============================
     # CIERRE
     # ==============================
+
+    page.pause()
 
     context.close()
     browser.close()

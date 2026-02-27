@@ -1,3 +1,4 @@
+import time
 
 class RegisterPage:
 
@@ -75,4 +76,4 @@ class RegisterPage:
         self.insert_bank_info(iban)
         self.insert_defaults(mail, data)
         self.insert_login_info(username, password)
-        self.form_confirm()
+        #self.form_confirm()

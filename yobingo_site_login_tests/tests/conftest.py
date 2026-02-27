@@ -1,5 +1,5 @@
 import pytest
-from ..config.config import data   # tu diccionario con varios usuarios
+from ..config.config import data, base_url
 
 @pytest.fixture
 def credenciales(request):
@@ -9,7 +9,7 @@ def credenciales(request):
 
 @pytest.fixture
 def login(page, credenciales):
-    page.goto("https://yobingo-qa-pt.bingosoft.com/")
+    page.goto(base_url)
     page.get_by_role("button", name="ACEITAR").click()
     page.get_by_role("button", name="INICIAR SESSÃO").click()
     page.get_by_role("textbox", name="Nome de utilizador:").fill(credenciales["username"])
