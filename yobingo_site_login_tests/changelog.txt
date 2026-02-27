@@ -1,0 +1,8 @@
+==== 27/02/26 ====
+- Creación Makefile
+- Refactor del Fixture de tests/conftest
+- Creación del "Pages"
+- Modificación usuarios del config/config.py
+
+-- To do --
+- Modificar readme con instrucciones del Makefile

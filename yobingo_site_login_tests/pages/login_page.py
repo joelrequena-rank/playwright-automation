@@ -37,4 +37,5 @@ class LoginPage:
         self.fill_username(username)
         self.fill_password(password)
         self.submit_login()
+        self.page.pause()
         self.page.wait_for_load_state("load")

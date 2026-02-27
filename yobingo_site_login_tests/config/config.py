@@ -2,12 +2,12 @@ import os
 
 data = {
     "valid_qa" : {
-        "username": "joeltestpt",
-        "password": "Charmander01!"
+        "username": "joeltestpt2",
+        "password": "qD4EjE5K99HA"
     },
     "admin_qa" : {
-        "username": "joeltestpt",
-        "password": "Charmander01!"
+        "username": "ana.lopez@rank.com",
+        "password": "Barcelona26!"
     },
     "valid_stg" : {
         "username": "joeltestpt",
@@ -24,4 +24,9 @@ env = {
     "staging": "https://yobingo-staging-pt.bingosoft.com/"
 }
 
-base_url = env[os.getenv("ENV", "staging")]
+environment = os.getenv("ENV", "staging")
+
+if environment not in env:
+    raise ValueError(f"Environment '{environment}' not supported")
+
+base_url = env[environment]
