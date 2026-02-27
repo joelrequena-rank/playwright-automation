@@ -16,7 +16,6 @@ def run(playwright: Playwright) -> None:
     #En vez de mandar una linea completa de codigo, creamos una variable con el "botón de login"
     # y en el assert miramos que no esté visible = "se ha iniciado sesión"
     # https://playwright.dev/python/docs/test-assertions
-    page.pause()
 
     # Cerrar sesión
     page.get_by_role("link", name="Sair").click()
