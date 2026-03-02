@@ -39,4 +39,3 @@ jobs:
       run: |
         cd yobingo_site_login_tests
         ENV=QA pytest -m qa
-        allure serve allure-results
