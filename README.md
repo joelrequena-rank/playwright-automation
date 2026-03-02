@@ -1,89 +1,154 @@
-# Playwright Automation Framework
+# Arquitectura del Proyecto
 
-End-to-end test automation framework built with Playwright and Pytest.
+El proyecto sigue el patrón Page Object Model (POM) para separar claramente:
 
-This project follows clean architecture principles including:
-- Page Object Model (POM)
-- Centralized fixtures
-- Indirect parametrization
-- Custom pytest markers
-- Scalable test structure
+- Lógica de test
+- Lógica de interacción con la UI
+- Configuración por entorno
+- Utilidades reutilizables
 
----
-
-## 🛠 Tech Stack
-
-- Python 3.x
-- Pytest
-- Playwright
-- Page Object Model (POM)
-- Git
-
----
-
-## 📁 Project Structure
-
-playwright_repogit/
-
-├── yobingo_site_automations/      # Page Objects & automation logic  
-├── yobingo_site_login_tests/      # Test suite  
-│   ├── config/                    # Test data configuration  
-│   ├── tests/                     # Test cases  
-│   │   ├── conftest.py            # Fixtures & test setup  
-│   │   └── test_login.py  
-│   ├── pytest.ini                 # Pytest configuration & markers  
-│  
-├── requirements.txt  
-├── .gitignore  
+```
+yobingo_site_login_tests/
+│
+├── pages/                # Page Objects
+│   └── login_page.py
+│
+├── tests/                # Casos de prueba
+│   └── test_login.py
+│
+├── config/               # Configuración por entorno
+│   └── config.py
+│
+├── utils/                # Helpers reutilizables
+│
+├── pytest.ini
+├── requirements.txt
+└── .github/workflows/    # CI pipeline
+```
 
 ---
 
-## 🚀 Installation
+# ⚙️ Instalación
 
-Clone the repository:
+## 1️⃣ Clonar el repositorio
 
-    git clone <repository-url>
-    cd <repository-folder>
+```bash
+git clone https://github.com/tuusuario/yobingo_site_login_tests.git
+cd yobingo_site_login_tests
+```
 
-Create virtual environment:
+## 2️⃣ Crear entorno virtual
 
-    python -m venv venv
-    source venv/bin/activate  # macOS/Linux
+```bash
+python -m venv venv
+source venv/bin/activate   # Mac/Linux
+```
 
-Install dependencies:
+## 3️⃣ Instalar dependencias
 
-    pip install -r requirements.txt
-    playwright install
+```bash
+pip install -r requirements.txt
+playwright install
+```
 
 ---
 
-## 🧪 Running Tests
+# 🚀 Ejecución de Tests
 
-Run all tests:
+La ejecución se realiza exclusivamente mediante los comandos definidos en el **Makefile**.
 
-    pytest
+## Ejecutar todos los tests (default)
 
-Run specific marker:
+```bash
+make test
+```
 
-## 🏷 Custom Markers
+Internamente ejecuta:
 
-Markers are defined in `pytest.ini`.
+```bash
+pytest -v
+```
 
-Example:
+---
 
-    [pytest]
-    markers =
-        login: login-related tests
-        regression: regression suite
-        smoke: smoke tests
+## Ejecutar entorno QA
 
-Execute by marker:
+```bash
+make test-qa
+```
 
-    pytest -m login
+Internamente ejecuta:
 
-## 📌 Future Enhancements
+```bash
+ENV=QA pytest -m qa
+```
 
-- CI/CD integration (GitHub Actions)
-- Environment configuration (QA / STG / PROD)
-- Session-level authentication reuse
-- Reporting integration (Allure)
+---
+
+## Ejecutar entorno Staging
+
+```bash
+make test-staging
+```
+
+Internamente ejecuta:
+
+```bash
+ENV=staging pytest -m stg
+```
+
+---
+
+## Ejecutar Staging en modo headed
+
+```bash
+make test-staging-headed
+```
+
+Internamente ejecuta:
+
+```bash
+ENV=staging pytest -m stg --headed
+```
+
+---
+
+## Pipeline automation (uso en CI)
+
+```bash
+make pipeline-automation
+```
+
+Internamente ejecuta:
+
+```bash
+ENV=QA pytest -m qa
+```
+
+---
+
+# 📊 Reportes con Allure
+
+## Generar resultados
+
+```bash
+pytest --alluredir=allure-results
+```
+
+## Visualizar reporte
+
+```bash
+allure serve allure-results
+```
+
+
+---
+
+# 🔁 Integración Continua
+
+El proyecto incluye un pipeline en **GitHub Actions** que:
+
+1. Instala dependencias
+2. Instala navegadores de Playwright
+3. Ejecuta tests E2E
+4. Falla automáticamente si algún test falla
