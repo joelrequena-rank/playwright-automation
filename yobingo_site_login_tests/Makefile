@@ -16,4 +16,4 @@ test-staging-headed:
     ENV=staging pytest -m stg --headed
 
 pipeline-automation:
-    ENV=QA pytest -m qa --alluredir=allure-results
+    ENV=QA pytest -m qa
