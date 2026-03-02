@@ -1,4 +1,5 @@
 # Arquitectura del Proyecto
+[![CI](https://github.com/joelrequena-rank/playwright-automation/actions/workflows/python-app.yml/badge.svg)](https://github.com/joelrequena-rank/playwright-automation/actions)
 
 El proyecto sigue el patrón Page Object Model (POM) para separar claramente:
 
