@@ -38,4 +38,4 @@ jobs:
     - name: Test with pytest
       run: |
         cd yobingo_site_login_tests
-        ENV=QA pytest -m qa --headed
+        ENV=QA pytest -m qa
