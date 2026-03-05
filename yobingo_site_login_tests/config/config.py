@@ -9,6 +9,22 @@ data = {
         "username": "ana.lopez@rank.com",
         "password": "Barcelona26!"
     },
+    "invalid_qa" : {
+        "username": "invent",
+        "password": "invent"
+    },
+    "empty_password" : {
+        "username": "joeltestpt2",
+        "password": ""
+    },
+    "empty_username": {
+        "username": "",
+        "password": "asdasdasd"
+    },
+    "no_user": {
+        "username": "",
+        "password": ""
+    },
     "valid_stg" : {
         "username": "joeltestpt",
         "password": "Charmander01!"
